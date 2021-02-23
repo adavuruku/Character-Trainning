@@ -11,8 +11,10 @@ import machineLearn.NetworkBase;
 
 public class AppConfig {
 	//Default settings
-    public static final String TRAINING_FILE_PATH = "C:\\\\Users\\\\SHERIFF\\\\Downloads\\\\Recognizing-Handwritten-Digits-KNN-and-MLP-master\\\\Recognizing-Handwritten-Digits-KNN-and-MLP-master\\\\Data\\\\cw2DataSet2.csv"; 
-    public static final String TEST_FILE_PATH = "C:\\\\Users\\\\SHERIFF\\\\Downloads\\\\Recognizing-Handwritten-Digits-KNN-and-MLP-master\\\\Recognizing-Handwritten-Digits-KNN-and-MLP-master\\\\Data\\\\cw2DataSet1.csv"; 
+    public static final String TRAINING_FILE_PATH = System.getProperty("user.dir") + "\\\\Data\\\\cw2DataSet2.csv";
+    public static final String TEST_FILE_PATH = System.getProperty("user.dir") + "\\\\Data\\\\cw2DataSet1.csv"; 
+
+//    public static final String TEST_FILE_PATH = "C:\\\\Users\\\\SHERIFF\\\\Downloads\\\\Recognizing-Handwritten-Digits-KNN-and-MLP-master\\\\Recognizing-Handwritten-Digits-KNN-and-MLP-master\\\\Data\\\\cw2DataSet1.csv"; 
     public final static boolean NERD_PRINTS = true; //If set to true will print the guess and original labels
     
     //K-nearest neigbours  settings
@@ -46,7 +48,7 @@ public class AppConfig {
     	            int label = Integer.parseInt(line.substring(lastCommaIndex+1, lastCommaIndex +2));
     	            String newLine = line.substring(0,lastCommaIndex);
     	            String[] splitLine = newLine.split(",");
-    	            
+    	            System.out.println("lastCommaIndex = "+lastCommaIndex + ", label = " +label + splitLine[0]);
     	            //Build an array to add to a set
     	            double[] splitLineNumber = new double[splitLine.length];
     	            for(int i = 0; i<splitLine.length; i++){
@@ -77,7 +79,9 @@ public class AppConfig {
              while(fileScanner.hasNextLine()){
                  String line = fileScanner.nextLine();
                  int lastCommaIndex = line.lastIndexOf(',');
+                 
                  int label = Integer.parseInt(line.substring(lastCommaIndex+1, lastCommaIndex +2));
+                 
                  String newLine = line.substring(0,lastCommaIndex);
                  String[] splitLine = newLine.split(",");
                  double[] splitLineNumber = new double[splitLine.length];

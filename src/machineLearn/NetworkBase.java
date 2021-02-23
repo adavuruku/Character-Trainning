@@ -22,7 +22,7 @@ public class NetworkBase {
     //1st - layer, 2nd - neuron, 3rd - previous layer neuron
     private double[][][] weights;
     //1st layer, 2nd - neuron
-    private double[][]bias;
+    private double[][] bias;
     
     private double[][] error_signal;
     private double[][] output_derivative;
@@ -74,7 +74,7 @@ public class NetworkBase {
         if(input.length != this.INPUT_LAYER_SIZE){
             return null;
         }
-        // index 0 is not really a layer, it sorta a buffer to store the data
+        // index 0 is not really a layer, it sort a buffer to store the data
         this.output[0] = input;
         // Iteration through the rest of the layers 
         for(int layer = 1; layer < NETWORK_SIZE; layer ++){
