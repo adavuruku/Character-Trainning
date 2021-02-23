@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Antanas
  * @date 2nd of March 2019
  */
-public class GenerateTrainingSet {
+public class TrainingSet {
     public final int sizeOfInput;
     public final int sizeOfOutput;
 
@@ -17,7 +17,7 @@ public class GenerateTrainingSet {
     //side 0 - input and side 1 = is expected output
     private ArrayList<double[][]> data = new ArrayList<>();
 
-    public GenerateTrainingSet(int sizeOfInput, int sizeOfOutput) {
+    public TrainingSet(int sizeOfInput, int sizeOfOutput) {
         this.sizeOfInput = sizeOfInput;
         this.sizeOfOutput = sizeOfOutput;
     }
@@ -34,10 +34,10 @@ public class GenerateTrainingSet {
     }
 
     //generate batch of data for the training to improve accuracy
-    public GenerateTrainingSet extractBatch(int sizeOfBatch) {
+    public TrainingSet extractBatch(int sizeOfBatch) {
         if(sizeOfBatch > 0 && getDatasize() <= this.getDatasize()) {
-        	GenerateTrainingSet set = new GenerateTrainingSet(sizeOfInput, sizeOfOutput);
-            Integer[] ids = HelperClass.randomValues(0,this.getDatasize() - 1, sizeOfBatch);
+        	TrainingSet set = new TrainingSet(sizeOfInput, sizeOfOutput);
+            Integer[] ids = AppConfig.randomValues(0,this.getDatasize() - 1, sizeOfBatch);
             for(Integer i:ids) {
                 set.addDataToSet(this.getAllInputData(i),this.getAllOutputData(i));
             }

@@ -3,8 +3,6 @@
  */
 package machineLearn;
 
-import config.AppConfig;
-
 /**
  * @author Antanas
  * @date 28th of February 2019
@@ -53,12 +51,12 @@ public class NetworkBase {
             //Holds the derivative values for change sensitivity  
             this.output_derivative[index] = new double[NETWORK_LAYER_SIZE[index]];
             //Fills the bias with random 
-            this.bias[index] = HelperClass.buildRandomArray(NETWORK_LAYER_SIZE[index],AppConfig.BIAS_RANGE_SMALLEST, AppConfig.BIAS_RANGE_BIGGEST);
+            this.bias[index] = AppConfig.buildRandomArray(NETWORK_LAYER_SIZE[index],AppConfig.BIAS_RANGE_SMALLEST, AppConfig.BIAS_RANGE_BIGGEST);
             
             //Exclude the input layer[0] 
             if(index > 0){
                 //Weights for a layer, also specifie the previous layer.
-                weights[index] = HelperClass.buildRandomArray(NETWORK_LAYER_SIZE[index], NETWORK_LAYER_SIZE[index-1], AppConfig.WEIGHTS_RANGE_SMALLEST, AppConfig.WEIGHTS_RANGE_BIGGEST);
+                weights[index] = AppConfig.buildRandomArray(NETWORK_LAYER_SIZE[index], NETWORK_LAYER_SIZE[index-1], AppConfig.WEIGHTS_RANGE_SMALLEST, AppConfig.WEIGHTS_RANGE_BIGGEST);
             }
         }
     }
@@ -109,12 +107,12 @@ public class NetworkBase {
      * @param loops amount of loops to process
      * @param batch_size  batch size used only in bigger sets ( should improve accuracy )
      */
-    public void startTrain(GenerateTrainingSet set, int loops, int batch_size){
+    public void startTrain(TrainingSet set, int loops, int batch_size){
         if(set.sizeOfInput != INPUT_LAYER_SIZE || set.sizeOfOutput != OUTPUT_LAYER_SIZE){
             return;
         }
         for(int index = 0; index < loops; index++){
-            GenerateTrainingSet batch = set.extractBatch(batch_size);
+            TrainingSet batch = set.extractBatch(batch_size);
             for(int b = 0; b < batch_size; b++){
                 this.training(batch.getAllInputData(b), batch.getAllOutputData(b), AppConfig.LEARNING_RATE);
             }
@@ -144,7 +142,7 @@ public class NetworkBase {
      * @param set training set
      * @return squared error of a set
      */
-    public double MeanSquaredErrorFunction(GenerateTrainingSet set){
+    public double MeanSquaredErrorFunction(TrainingSet set){
         double error = 0;
         for(int index = 0; index < set.getDatasize(); index++){
             error += MeanSquaredErrorFunction(set.getAllInputData(index), set.getAllOutputData(index));
