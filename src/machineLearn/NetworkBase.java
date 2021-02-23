@@ -3,10 +3,6 @@
  */
 package machineLearn;
 
-/**
- * @author Antanas
- * @date 28th of February 2019
- */
 public class NetworkBase {
 
     /*Constats defining the neural network*/
@@ -50,6 +46,7 @@ public class NetworkBase {
             this.error_signal[index] = new double[NETWORK_LAYER_SIZE[index]];
             //Holds the derivative values for change sensitivity  
             this.output_derivative[index] = new double[NETWORK_LAYER_SIZE[index]];
+            
             //Fills the bias with random 
             this.bias[index] = AppConfig.buildRandomArray(NETWORK_LAYER_SIZE[index],AppConfig.BIAS_RANGE_SMALLEST, AppConfig.BIAS_RANGE_BIGGEST);
             
@@ -83,7 +80,7 @@ public class NetworkBase {
                 double sum = 0;
                 for(int previousNeuron = 0; previousNeuron < NETWORK_LAYER_SIZE[layer-1];
                         previousNeuron++){
-                    //Sum is increast by the output of previous layer and
+                    //Sum is increase by the output of previous layer and
                     //multiplied by the weights of a previous neuron
                     sum += output[layer-1][previousNeuron] * 
                             weights[layer][neuron][previousNeuron];
