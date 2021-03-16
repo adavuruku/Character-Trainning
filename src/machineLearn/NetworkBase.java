@@ -116,37 +116,7 @@ public class NetworkBase {
         }
     }
     
-    /**
-     * Function for average squared difference between the estimated values and what is estimated
-     * @param input array of guesses
-     * @param target array of targets
-     * @return 
-     */
-    public double MeanSquaredErrorFunction(double[] input, double[] target){
-        if(input.length != INPUT_LAYER_SIZE || target.length != OUTPUT_LAYER_SIZE){
-            return 0;
-        }
-        calculationFunction(input);
-        double error = 0;
-        for(int index = 0; index < target.length; index++){
-            error += (target[index] - output[NETWORK_SIZE-1][index]) * (target[index] - output[NETWORK_SIZE-1][index]);
-        }
-        return error / (2D * target.length);
-    }
-    
-    /**
-     * Average squared difference between the estimated values and what is estimated for the set
-     * @param set training set
-     * @return squared error of a set
-     */
-    public double MeanSquaredErrorFunction(TrainingSet set){
-        double error = 0;
-        for(int index = 0; index < set.getDatasize(); index++){
-            error += MeanSquaredErrorFunction(set.getAllInputData(index), set.getAllOutputData(index));
-        }
-        return error / set.getDatasize();
-    }
-    
+
     /**
      * Training function as a main
      * @param input input array
@@ -199,7 +169,8 @@ public class NetworkBase {
         }
     }
     /**
-     * Simple sigmoid function
+     * Simple sigmoid function to estimate the final output
+     * of the train network
      * @param inputValue
      * @return returns the output of sigmoid
      */

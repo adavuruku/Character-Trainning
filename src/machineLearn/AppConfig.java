@@ -11,7 +11,6 @@ public class AppConfig {
     public static final String TEST_FILE_PATH = System.getProperty("user.dir") + "\\\\Data\\\\cw2DataSet1.csv"; 
 
     //Neural Network settings
-    public final static boolean USE_NEURAL_NETWORK = false; //If set to true, app will run NEURAL NETWORK
     public static final double LEARNING_RATE = 0.1;
     public final static double BIAS_RANGE_SMALLEST = -0.5;
     public final static double BIAS_RANGE_BIGGEST = 0.7;
@@ -28,6 +27,7 @@ public class AppConfig {
     /*
      * Method that read the csv 
      * file and load the neurons
+     * for training dataSet
      * */
     public static TrainingSet generateTrainingDataFromFile(){
     	TrainingSet set = new TrainingSet(INPUT_LAYER_NODE_AMOUNT, 10);
@@ -57,11 +57,14 @@ public class AppConfig {
 		}finally {
 			fileScanner.close();
 		}
-    	
-       
+ 
     }
     
-    //read excel file for generate testingSet
+    /*
+     * Method that read the csv 
+     * file and load the neurons
+     * for testing dataSet
+     * */
     public static TrainingSet generateTestingDataFromFile(){
     	TrainingSet set = new TrainingSet(INPUT_LAYER_NODE_AMOUNT, 10);
     	Scanner fileScanner = null;
@@ -91,9 +94,12 @@ public class AppConfig {
 		}finally {
 			fileScanner.close();
 		}
-       
-        
     }
+    
+    /**
+     * Function that trains the testing dataset to convert it to neuron 
+     * for the Network Training the
+     * */
     
     public static void trainData(NetworkBase net, TrainingSet set, int epochs, int loops, int batch_size){
     	System.out.println("Training neural network...");
@@ -103,6 +109,9 @@ public class AppConfig {
         }
     }
     
+  /*
+   * print of Result of the result of train dataset (expected reuslt and trained result)
+   * */
     public static void runTrainSet(NetworkBase net, TrainingSet set){
     	System.out.println("Result Of Train Datasets");
     	System.out.println("****************************************");
@@ -119,8 +128,7 @@ public class AppConfig {
     }
     
     
-    //start
-    
+
     public static double[] buildRandomArray(int range, double smallest, double biggest){
         if(range < 1){
             return null;
